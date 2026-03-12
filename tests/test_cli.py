@@ -1,5 +1,6 @@
 import subprocess
 import sys
+from pathlib import Path
 
 
 def _run(args: list[str]) -> subprocess.CompletedProcess:
@@ -25,7 +26,7 @@ class TestCLI:
         assert "0.1.0" in r.stdout
 
     def test_default_generates_password(self) -> None:
-        r = _run([])
+        r = _run(["--length", "16"])
         assert r.returncode == 0
         pw = r.stdout.strip()
         assert len(pw) == 16
@@ -49,3 +50,31 @@ class TestCLI:
         assert r.returncode == 1
         assert "Error" in r.stderr
         assert "at least one" in r.stderr.lower()
+
+    def test_count_generates_multiple(self) -> None:
+        r = _run(["--count", "5", "--length", "8"])
+        assert r.returncode == 0
+        lines = r.stdout.strip().split("\n")
+        assert len(lines) == 5
+        assert all(len(pw) == 8 for pw in lines)
+
+    def test_output_to_file(self, tmp_path: Path) -> None:
+        out_file = tmp_path / "passwords.txt"
+        r = _run(["--count", "2", "--output", str(out_file)])
+        assert r.returncode == 0
+        content = out_file.read_text()
+        lines = content.strip().split("\n")
+        assert len(lines) == 2
+
+    def test_passphrase_mode(self) -> None:
+        r = _run(["--passphrase"])
+        assert r.returncode == 0
+        pw = r.stdout.strip()
+        words = pw.split("-")
+        assert len(words) == 4
+
+    def test_passphrase_custom_words(self) -> None:
+        r = _run(["--passphrase", "--words", "6"])
+        assert r.returncode == 0
+        words = r.stdout.strip().split("-")
+        assert len(words) == 6

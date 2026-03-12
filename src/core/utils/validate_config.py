@@ -1,8 +1,10 @@
-from ..config import GeneratorConfig
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from src.core.config import GeneratorConfig
 
 
-
-def validate_config(config: GeneratorConfig) -> None:
+def validate_config(config: "GeneratorConfig") -> None:
     min_length = sum([config.lowercase, config.uppercase, config.digits, config.symbols])
 
     if config.length < min_length:

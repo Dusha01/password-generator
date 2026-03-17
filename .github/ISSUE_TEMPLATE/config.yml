@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://github.com/Dusha01/password-generator#readme
+    about: README и документация проекта

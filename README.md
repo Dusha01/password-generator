@@ -238,6 +238,21 @@ python run.py --passphrase
 pytest tests/ -v
 ```
 
+### Release
+
+Releases are automated via GitHub Actions. To create a release:
+
+1. Update version in `pyproject.toml` and `src/version.py`
+2. Commit and push changes
+3. Create and push a tag:
+
+```bash
+git tag v0.1.1
+git push origin v0.1.1
+```
+
+The workflow will run tests, build the package, and create a GitHub Release with wheel and sdist artifacts.
+
 ## License
 
 MIT License — see [LICENSE](LICENSE) for details.

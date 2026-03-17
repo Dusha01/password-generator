@@ -1,6 +1,6 @@
 [project]
 name = "password-generator"
-version = "0.1.0"
+version = "1.0.0"
 description = "CLI password generation utility"
 readme = "README.md"
 license = { text = "MIT" }

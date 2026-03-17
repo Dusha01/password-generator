@@ -2,13 +2,16 @@ import subprocess
 import sys
 from pathlib import Path
 
+from src.version import __version__
+
 
 def _run(args: list[str]) -> subprocess.CompletedProcess:
+    project_root = Path(__file__).resolve().parent.parent
     return subprocess.run(
         [sys.executable, "run.py"] + args,
         capture_output=True,
         text=True,
-        cwd="/home/dusha/Projects/CLI/password-generator",
+        cwd=project_root,
     )
 
 
@@ -23,7 +26,7 @@ class TestCLI:
     def test_version(self) -> None:
         r = _run(["--version"])
         assert r.returncode == 0
-        assert "0.1.0" in r.stdout
+        assert __version__ in r.stdout
 
     def test_default_generates_password(self) -> None:
         r = _run(["--length", "16"])

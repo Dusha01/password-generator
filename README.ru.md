@@ -238,6 +238,21 @@ python run.py --passphrase
 pytest tests/ -v
 ```
 
+### Релиз
+
+Релизы автоматизированы через GitHub Actions. Чтобы создать релиз:
+
+1. Обнови версию в `pyproject.toml` (единственный источник истины)
+2. Закоммить и запушь изменения
+3. Создай и запушь тег:
+
+```bash
+git tag v1.0.1
+git push origin v1.0.1
+```
+
+Workflow запустит тесты, соберёт пакет и создаст GitHub Release с артефактами.
+
 ## Лицензия
 
 MIT License — см. [LICENSE](LICENSE).

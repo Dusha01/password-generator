@@ -242,7 +242,7 @@ pytest tests/ -v
 
 Releases are automated via GitHub Actions. To create a release:
 
-1. Update version in `pyproject.toml` and `src/version.py`
+1. Update version in `pyproject.toml` (единственный источник истины)
 2. Commit and push changes
 3. Create and push a tag:
 

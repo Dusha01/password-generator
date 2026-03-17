@@ -39,10 +39,21 @@ jobs:
           python-version: '3.12'
 
       - name: Install build tools
-        run: pip install build
+        run: pip install build pyinstaller
 
       - name: Build package
         run: python -m build
+
+      - name: Install package for PyInstaller
+        run: pip install -e .
+
+      - name: Build Linux binary
+        run: |
+          pyinstaller --onefile \
+            --name pwgen \
+            --add-data "pyproject.toml:." \
+            run.py
+          mv dist/pwgen dist/pwgen-linux-x86_64
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

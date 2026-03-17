@@ -251,7 +251,9 @@ git tag v0.1.1
 git push origin v0.1.1
 ```
 
-The workflow will run tests, build the package, and create a GitHub Release with wheel and sdist artifacts.
+The workflow will run tests, build the package, create a Linux x86_64 binary (PyInstaller), and create a GitHub Release with:
+- `*.whl` and `*.tar.gz` — pip-installable package
+- `pwgen-linux-x86_64` — standalone binary (no Python required)
 
 ## License
 

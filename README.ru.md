@@ -251,7 +251,9 @@ git tag v1.0.1
 git push origin v1.0.1
 ```
 
-Workflow запустит тесты, соберёт пакет и создаст GitHub Release с артефактами.
+Workflow запустит тесты, соберёт пакет, создаст бинарник Linux x86_64 (PyInstaller) и создаст GitHub Release с:
+- `*.whl` и `*.tar.gz` — пакет для pip
+- `pwgen-linux-x86_64` — standalone-бинарник (Python не требуется)
 
 ## Лицензия
 
